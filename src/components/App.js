@@ -3,11 +3,15 @@ import "./App.css";
 
 /** Components**/
 import Stories from "./Stories";
+import SearchStories from "./SearchStories";
 
-const App = ({ stories, onArchive }) => {
+const App = () => {
   return (
     <div className="app">
-      <Stories stories={stories} onArchive={onArchive} />
+      <div className="interactions">
+        <SearchStories />
+      </div>
+      <Stories />
     </div>
   );
 };

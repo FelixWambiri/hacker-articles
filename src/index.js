@@ -3,33 +3,15 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
+import { Provider } from "mobx-react";
 
-const stories = [
-  {
-    title: "React",
-    url: "https://www.typescriptlang.org/docs/handbook/gulp.html",
-    author: "Jodan Walke",
-    num_comments: 3,
-    points: 4,
-    objectID: 0
-  },
-  {
-    title: "Redux",
-    url: "https://www.typescriptlang.org/docs/handbook/gulp.html",
-    author: "Annette Dev",
-    num_comments: 5,
-    points: 41,
-    objectID: 1
-  }
-];
+/**Store**/
+import store from "./stores";
 
 ReactDOM.render(
-  <App
-    stories={stories}
-    onArchive={objectID => {
-      console.log(objectID);
-    }}
-  />,
+  <Provider {...store}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 );
 

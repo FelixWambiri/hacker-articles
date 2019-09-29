@@ -1,5 +1,6 @@
 import React from "react";
 import "./Stories.css";
+import { inject, observer } from "mobx-react";
 
 /** Components**/
 import Story from "./Story";
@@ -26,17 +27,13 @@ const COLUMNS = {
   }
 };
 
-const Stories = ({ stories, onArchive }) => {
+const Stories = ({ storyStore }) => {
   return (
     <div className="stories">
       <StoriesHeader columns={COLUMNS} />
-      {stories.map(story => (
-        <Story
-          key={story.objectID}
-          story={story}
-          columns={COLUMNS}
-          onArchive={onArchive}
-        />
+      {storyStore.error && <p className="error">Something went wrong...</p>}
+      {storyStore.readableStories.map(story => (
+        <Story key={story.objectID} story={story} columns={COLUMNS} />
       ))}
     </div>
   );
@@ -56,4 +53,4 @@ const StoriesHeader = ({ columns }) => {
   );
 };
 
-export default Stories;
+export default inject("storyStore")(observer(Stories));
